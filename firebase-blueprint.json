@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with optional contact details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "phone": { "type": "string" },
+        "address": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Artisan bakery items catalog product representation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "price": { "type": "number" },
+        "discount": { "type": "number" },
+        "stock": { "type": "number" },
+        "ingredients": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "category", "price", "stock"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Historical order record of products purchased",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "deliveryPhone": { "type": "string" },
+        "products": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "orderStatus": { "type": "string", "enum": ["Pending", "Preparing", "Out for Delivery", "Delivered"] },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Pending"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "userName", "products", "totalAmount"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Promotional coupons used for dynamic cart discounts",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["percentage", "fixed"] },
+        "discountValue": { "type": "number" },
+        "expiryDate": { "type": "string" },
+        "activeStatus": { "type": "boolean" }
+      },
+      "required": ["code", "discountType", "discountValue", "expiryDate", "activeStatus"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Secured user database profiles"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Global list of available bakery items"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Placed order list tracking"
+    },
+    "/coupons/{code}": {
+      "schema": "Coupon",
+      "description": "Promotional campaign elements"
+    }
+  }
+}

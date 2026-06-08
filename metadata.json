@@ -1,0 +1,6 @@
+{
+  "name": "Artisan Baker Stock & Sales System",
+  "description": "Premium French artisan bakery stock management and storefront with AI-powered baking assistants, design prompt creators, smart inventory analytics, and order tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
